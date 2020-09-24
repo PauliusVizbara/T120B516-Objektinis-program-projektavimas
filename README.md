@@ -19,5 +19,5 @@
 ## Architektūra
 
 - Pats žaidimas bus iškeltas į **Singleton**'ą, kuris bus atsakingas už žaidimo eigą (lygio paleidimas ir pakeitimas, laimėjimo ir pralaimėjimo sužiūrėjimas)
-- Kaip dažnai yra daroma žaidimuose - pagrindinė bazinė abstrakti klasė bus **Unit**, kuri turės tik savo poziciją. Norint sukurti specifinius objektus kaip pastatus ar kareivius bus naudojami **BuildingFactory** ir **SoldierFactory**, kurie implementuos sąsąją **UnitFactory**, kuris bus abstraktus fabrikas (*angl. abstract factory*)
+- Pagrindinė bazinė abstrakti klasė bus **Unit**, kuri turės tik savo poziciją. Norint sukurti specifinius objektus kaip pastatus ar kareivius bus naudojami **BuildingFactory** ir **SoldierFactory**, kurie implementuos sąsąją **UnitFactory**, kuris bus abstraktus fabrikas (*angl. abstract factory*)
 
