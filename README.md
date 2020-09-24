@@ -1,4 +1,4 @@
-# T120B516-Objektinis-program-projektavimas. Projektas
+# T120B516 Projektas
 
 ## Žaidimo aprašymas
 
