@@ -2,7 +2,7 @@
 
 ## Žaidimo aprašymas
 
-Žaidimo tipas yra kelių žaidėjų Tower Defense, kuriame žaidėjai bendromis psatangomis statydamas gynybinius bokštus stengsnis apsiginti nuo vis didėjančių priešų atakų. 
+Žaidimo tipas yra kelių žaidėjų Tower Defense, kuriame žaidėjai bendromis pastangomis statydamas gynybinius bokštus stengsnis apsiginti nuo vis didėjančių priešų atakų. 
 
 Žaidimo formato pavyzdys:
 
