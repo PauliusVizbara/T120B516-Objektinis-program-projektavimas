@@ -1,2 +1,23 @@
-# T120B516-Objektinis-program-projektavimas
-Projekto repozitorija
+# T120B516-Objektinis-program-projektavimas. Projektas
+
+## Žaidimo aprašymas
+
+Žaidimo tipas yra kelių žaidėjų Tower Defense, kuriame žaidėjai bendromis psatangomis statydamas gynybinius bokštus stengsnis apsiginti nuo vis didėjančių priešų atakų. 
+
+Žaidimo formato pavyzdys:
+
+![](https://steamcdn-a.akamaihd.net/steam/apps/989650/ss_2b864a2aed7527850fa6aa690e8e995c8f376122.1920x1080.jpg?t=1546777522)
+
+## Technologija
+
+Žaidimui sukurti bus naudojama:
+
+- **C#** kalba
+- **ASP.NET** karkasas
+- **SignalR** biblioteka asinchroniškai komunikacijai
+
+## Architektūra
+
+- Pats žaidimas bus iškeltas į **Singleton**'ą, kuris bus atsakingas už žaidimo eigą (lygio paleidimas ir pakeitimas, laimėjimo ir pralaimėjimo sužiūrėjimas)
+- Kaip dažnai yra daroma žaidimuose - pagrindinė bazinė abstrakti klasė bus **Unit**, kuri turės tik savo poziciją. Norint sukurti specifinius objektus kaip pastatus ar kareivius bus naudojami **BuildingFactory** ir **SoldierFactory**, kurie implementuos sąsąją **UnitFactory**, kuris bus abstraktus fabrikas (*angl. abstract factory*)
+
