@@ -1,31 +1,42 @@
 ﻿@page
 
-<div class="container">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-2">User</div>
-        <div class="col-4"><input type="text" id="userInput" /></div>
-    </div>
-    <div class="row">
-        <div class="col-2">Message</div>
-        <div class="col-4"><input type="text" id="messageInput" /></div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">
-            <input type="button" id="sendButton" value="Send Message" />
-        </div>
-    </div>
+<div id="unit-selector">
+    <button class="selector active" id="archer-tower"></button>
+    <button class="selector" id="mage-tower"></button>
+    <button class="selector" id="bomb-tower"></button>
 </div>
-<div class="row">
-    <div class="col-12">
-        <hr />
-    </div>
+
+<div id="game-grid">
+    <button id="0-0"></button>
+    <button id="0-1"></button>
+    <button id="0-2"></button>
+    <button id="0-3"></button>
+    <button id="0-4"></button>
+
+    <button id="1-0"></button>
+    <button id="1-1"></button>
+    <button id="1-2"></button>
+    <button id="1-3"></button>
+    <button id="1-4"></button>
+
+    <button id="2-0"></button>
+    <button id="2-1"></button>
+    <button id="2-2"></button>
+    <button id="2-3"></button>
+    <button id="2-4"></button>
+
+    <button id="3-0"></button>
+    <button id="3-1"></button>
+    <button id="3-2"></button>
+    <button id="3-3"></button>
+    <button id="3-4"></button>
+
+    <button id="4-0"></button>
+    <button id="4-1"></button>
+    <button id="4-2"></button>
+    <button id="4-3"></button>
+    <button id="4-4"></button>
 </div>
-<div class="row">
-    <div class="col-6">
-        <ul id="messagesList"></ul>
-    </div>
-</div>
+
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>

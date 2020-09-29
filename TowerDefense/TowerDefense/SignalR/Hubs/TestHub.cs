@@ -8,9 +8,9 @@ namespace TowerDefense.SignalR.Hubs
 {
     public class TestHub : Hub
     {
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string x, string y, string unitType)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.SendAsync("ReceiveMessage", x, y, unitType);
         }
     }
 }
