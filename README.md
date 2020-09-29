@@ -21,10 +21,12 @@
 - Pats žaidimas bus iškeltas į **Singleton**'ą, kuris bus atsakingas už žaidimo eigą (lygio paleidimas ir pakeitimas, laimėjimo ir pralaimėjimo sužiūrėjimas)
 - Pagrindinė bazinė abstrakti klasė bus **Unit**, kuri turės tik savo poziciją. Norint sukurti specifinius objektus kaip pastatus ar kareivius bus naudojami **BuildingFactory** ir **SoldierFactory**, kurie implementuos sąsąją **UnitFactory**, kuris bus abstraktus fabrikas (*angl. abstract factory*)
 
-## Paleidimas
+## Projekto paleidimas
 
-- Step 1
-- Step 2
+- Įsirašyti SqlServer ir ManagementStudio
+- appsettings.json įsirašyti savo serverio pavadinimą.Pvz: Server=manoServeris;visaKitaPalikt Pažiūrėti galima per Management studio: File -> Connect object explorer... ir čia nukopijuoti server name
+- Atsidarius projektą paleisti per PackageManagerConsole komandą 'Update-database'.
+- Pasileisti projektą
 
 ## Testavimas
 
