@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TowerDefense.Models.MapFactory;
+using TowerDefense.Models.Observer;
 using TowerDefense.Models.TowerFactory;
 
 namespace TowerDefense
@@ -16,6 +17,16 @@ namespace TowerDefense
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+
+            ScoreSystem scoreSystem = new ScoreSystem();
+            Score score = new Score();
+            scoreSystem.Attach(score);
+            scoreSystem.Score = 100;
+            scoreSystem.Score = 110;
+            scoreSystem.Score = 120;
+            scoreSystem.Score = 130;
+
+
 
             TowerCreator towerCreator = new TowerCreator();
 
