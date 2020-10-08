@@ -36,6 +36,10 @@ html {
     }
 }
 
+main {
+    width: 100%;
+}
+
 .border-top {
     border-top: 1px solid #e5e5e5;
 }
@@ -74,85 +78,117 @@ body {
 }
 
 * {
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
 
+
 /* Game */
 #unit-selector {
-    width: 50%;
-    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
 }
 
-    #unit-selector button {
-        display: block;
-        width: 33%;
-        margin: 10px;
-        flex-basis: 33%;
-        height: auto;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
-        background-position: center center !important;
-    }
-
-        #unit-selector button:before {
-            content: "";
-            float: left;
-            padding-top: 100%;
-        }
-
-.selector.active {
-    border: 4px solid red;
+#controls {
+    padding: 30px;
+    flex-direction: column;
+    display: flex;
 }
 
-.selector {
+#score-tracker{
+    display: flex;
+}
+
+.tracker{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+.tracker img{
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+#controls h2:not(:first-of-type) {
+    margin-top: 50px;
+}
+
+#unit-selector button {
+    display: block;
     outline: none;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    border: none;
 }
 
-    .selector#archer-tower {
-        background: url('/images/archer-tower.png');
-    }
+#unit-selector button:before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+}
 
-    .selector#mage-tower {
-        background: url('/images/mage-tower.png');
-    }
+#unit-selector .selector.active {
+    border: 2px solid #333;
+}
+
+.selector#archer-tower {
+    background: url('/images/archer-tower.png');
+}
+
+.selector#mage-tower {
+    background: url('/images/mage-tower.png');
+}
 
 
-    .selector#bomb-tower {
-        background: url('/images/bomb-tower.png');
-    }
+.selector#bomb-tower {
+    background: url('/images/bomb-tower.png');
+}
 
+
+.game-wrapper {
+    display: flex;
+}
 
 #game-grid {
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
     display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(5, auto);
+    grid-gap: 0;
+    grid-template-columns: repeat(15, auto);
 }
 
-    #game-grid button {
-        width: 100%;
-        padding-bottom: 100%;
-        height: 0px;
-    }
+#game-grid button {
+    border: none;
+    outline: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    height: 0px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-color: #657E39;
+    background-image: url('/images/grassTile.png');
+}
 
-        #game-grid button.occupied {
-            background-size: contain !important;
-            background-repeat: no-repeat !important;
-            background-position: center center !important;
-        }
+#game-grid button.path {
+    background-color: #4F3422;
+    background-image: url('/images/pathTile.png');
+}
 
-        #game-grid button.archer-tower {
-            background: url('/images/archer-tower.png');
-        }
+#game-grid button.archer-tower {
+    background-image: url('/images/archer-tower.png');
+}
 
-        #game-grid button.mage-tower {
-            background: url('/images/mage-tower.png');
-        }
+#game-grid button.mage-tower {
+    background-image: url('/images/mage-tower.png');
+}
 
 
-        #game-grid button.bomb-tower {
-            background: url('/images/bomb-tower.png');
-        }
+#game-grid button.bomb-tower {
+    background-image: url('/images/bomb-tower.png');
+}
