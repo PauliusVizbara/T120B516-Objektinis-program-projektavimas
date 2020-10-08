@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TowerDefense.GameManagerSingleton;
 using TowerDefense.Models;
 
 namespace TowerDefense.Controllers
@@ -20,6 +21,12 @@ namespace TowerDefense.Controllers
 
         public IActionResult Index()
         {
+            GameManager g1 = GameManager.GetGameManager();
+            var level = g1.CurrentLevel();
+            g1.LevelFinished();
+            GameManager g2 = GameManager.GetGameManager();
+            g2.CurrentLevel();
+
             return View();
         }
 
