@@ -1,0 +1,44 @@
+﻿@model TowerDefense.Data.MapPathCoordinate
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>MapPathCoordinate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="XCoordinate" class="control-label"></label>
+                <input asp-for="XCoordinate" class="form-control" />
+                <span asp-validation-for="XCoordinate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YCoordinate" class="control-label"></label>
+                <input asp-for="YCoordinate" class="form-control" />
+                <span asp-validation-for="YCoordinate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CoordinateIndex" class="control-label"></label>
+                <input asp-for="CoordinateIndex" class="form-control" />
+                <span asp-validation-for="CoordinateIndex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapId" class="control-label"></label>
+                <select asp-for="MapId" class ="form-control" asp-items="ViewBag.MapId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

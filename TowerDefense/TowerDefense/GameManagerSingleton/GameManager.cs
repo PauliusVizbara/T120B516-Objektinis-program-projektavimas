@@ -2,22 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TowerDefense.Data;
 
 namespace TowerDefense.GameManagerSingleton
 {
-    /// <summary>
-
-    /// The 'Singleton' class
-
-    /// </summary>
-
     public class GameManager
 
     {
         private static GameManager _instance;
         private int _currentLevel = 0;
-        private Random _random = new Random();
-
+        //private List<MapPathCoordinate> _currentMap = new List<MapPathCoordinate>();
         private static object syncLock = new object();
 
         protected GameManager()
@@ -53,6 +47,11 @@ namespace TowerDefense.GameManagerSingleton
         public void GameOver()
         {
             _currentLevel = 0;
+        }
+
+        public void GameStart()
+        {
+            _currentLevel = 1;
         }
     }
 }
