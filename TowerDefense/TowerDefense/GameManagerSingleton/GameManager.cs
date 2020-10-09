@@ -13,6 +13,7 @@ namespace TowerDefense.GameManagerSingleton
         private int _currentLevel = 0;
         //private List<MapPathCoordinate> _currentMap = new List<MapPathCoordinate>();
         private static object syncLock = new object();
+        private List<MapPathCoordinate> Coordinates = new List<MapPathCoordinate>();
 
         protected GameManager()
         {
@@ -52,6 +53,16 @@ namespace TowerDefense.GameManagerSingleton
         public void GameStart()
         {
             _currentLevel = 1;
+        }
+
+        public void SetCoordinates(List<MapPathCoordinate> coordinates)
+        {
+            Coordinates = coordinates;
+        }
+
+        public List<MapPathCoordinate> GetCoordinates()
+        {
+            return Coordinates;
         }
     }
 }
