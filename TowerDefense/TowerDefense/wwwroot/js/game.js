@@ -1,8 +1,10 @@
 ﻿"use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/testHub").build();
-
 connection.start()
+
+const gameHubConnection = new signalR.HubConnectionBuilder().withUrl("/gameFlow").build();
+gameHubConnection.start()
 
 const pathCells = [
     { x: 0, y: 1 }, { x: 1, y: 1 },
@@ -22,6 +24,11 @@ const pathCells = [
     { x: 7, y: 14 },
 ]
 
+
+
+document.getElementById('start-game-button').addEventListener("click", (e) => {
+    gameHubConnection.invoke("StartGame")
+})
 
 connection.on("ReceiveMessage", (x, y, unitType) => {
     document.getElementById(`${x}-${y}`).classList.toggle(unitType)

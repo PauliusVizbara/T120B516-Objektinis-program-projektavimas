@@ -83,6 +83,7 @@ namespace TowerDefense
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapHub<TestHub>("/testhub");
+                endpoints.MapHub<GameFlowHub>("/gameFlow");
             });
         }
     }
