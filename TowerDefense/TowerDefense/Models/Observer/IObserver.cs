@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefense.Models.Observer
 {
-    interface IObserver
+    public interface IObserver
     {
 
         void Update(ISubject subject);
