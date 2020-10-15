@@ -180,6 +180,19 @@ body {
     background-image: url('/images/pathTile.png');
 }
 
+#game-grid button.monster1 {
+    background-image: url('/images/monsterTile1.png');
+}
+
+#game-grid button.monster2 {
+    background-image: url('/images/monsterTile2.png');
+}
+
+#game-grid button.monster3 {
+    background-image: url('/images/monsterTile3.png');
+}
+
+
 #game-grid button.archer-tower {
     background-image: url('/images/archer-tower.png');
 }

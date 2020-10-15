@@ -3,25 +3,18 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/testHub").build();
 connection.start()
 
-const gameHubConnection = new signalR.HubConnectionBuilder().withUrl("/gameFlow").build();
-gameHubConnection.start()
+
 
 const pathCells = [
     { x: 0, y: 1 }, { x: 1, y: 1 },
-    { x: 2, y: 1 }, { x: 2, y: 2 },
-    { x: 2, y: 3 }, { x: 2, y: 4 },
-    { x: 2, y: 3 }, { x: 2, y: 4 },
-    { x: 3, y: 4 }, { x: 4, y: 4 },
-    { x: 5, y: 4 }, { x: 6, y: 4 },
-    { x: 6, y: 5 }, { x: 6, y: 6 },
-    { x: 6, y: 7 }, { x: 6, y: 8 },
-    { x: 7, y: 8 }, { x: 8, y: 8 },
-    { x: 9, y: 8 }, { x: 10, y: 8 },
-    { x: 10, y: 9 }, { x: 10, y: 10 },
-    { x: 10, y: 11 }, { x: 9, y: 11 },
-    { x: 8, y: 11 }, { x: 7, y: 11 },
-    { x: 7, y: 12 }, { x: 7, y: 13 },
-    { x: 7, y: 14 },
+    { x: 2, y: 1 }, { x: 3, y: 1 },
+    { x: 4, y: 1 }, { x: 5, y: 1 },
+    { x: 6, y: 1 }, { x: 7, y: 1 },
+    { x: 7, y: 2 }, { x: 7, y: 3 },
+    { x: 7, y: 4 }, { x: 8, y: 4 },
+    { x: 9, y: 4 }, { x: 10, y: 4 },
+    { x: 11, y: 4 }, { x: 12, y: 4 },
+    { x: 13, y: 4 }, { x: 14, y: 4 },
 ]
 
 
@@ -37,7 +30,6 @@ connection.on("ReceiveMessage", (x, y, unitType) => {
 
 
 const unitSelectors = Array.from(document.getElementById("unit-selector").children)
-console.log(unitSelectors)
 unitSelectors.forEach(selector => {
 
     selector.addEventListener("click", (e) => {
@@ -51,7 +43,8 @@ unitSelectors.forEach(selector => {
 
 
 const gridSize = 15
-const grid = document.getElementById("game-grid")
+const grid = Array(gridSize).fill().map(() => Array(gridSize).fill())
+const gridDOM = document.getElementById("game-grid")
 for (let i = 0; i < gridSize; i++) {
     for (let j = 0; j < gridSize; j++) {
         const cell = document.createElement('button')
@@ -70,7 +63,24 @@ for (let i = 0; i < gridSize; i++) {
             connection.invoke("SendMessage", coordinates[0], coordinates[1], type)
             e.preventDefault()
         })
-        grid.append(cell)
+        gridDOM.append(cell)
+        grid[i][j] = cell
+
     }
 
 }
+
+const gameHubConnection = new signalR.HubConnectionBuilder().withUrl("/gameFlow").build();
+gameHubConnection.start()
+
+gameHubConnection.on('GameStatus', (data) => {
+    const monsterList = data.monsterList
+    Array.from(gridDOM.children).forEach(element => { element.classList.remove('monster1'); element.classList.remove('monster2'); element.classList.remove('monster3') })
+    for (let i = 0; i < monsterList.length; i++) {
+        const monster = monsterList[i]
+        const { xCoordinate, yCoordinate, monsterType } = monster
+        if (grid[yCoordinate - 1] && grid[yCoordinate - 1][xCoordinate - 1]) {
+            grid[yCoordinate - 1][xCoordinate - 1].classList.add(`monster${monsterType}`)
+        }
+    }
+})

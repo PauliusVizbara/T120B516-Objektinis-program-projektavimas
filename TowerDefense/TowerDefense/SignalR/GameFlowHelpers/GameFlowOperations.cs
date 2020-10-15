@@ -19,8 +19,12 @@ namespace TowerDefense.SignalR.GameFlowHelpers
             {
                 monster.Position++;
                 var coordinatesByPosition = coordinates.FirstOrDefault(x => x.CoordinateIndex == monster.Position);
-                monster.XCoordinate = coordinatesByPosition.XCoordinate;
-                monster.YCoordinate = coordinatesByPosition.YCoordinate;
+                if (coordinatesByPosition != null)
+                {
+                    monster.XCoordinate = coordinatesByPosition.XCoordinate;
+                    monster.YCoordinate = coordinatesByPosition.YCoordinate;
+                }
+           
             }
         }
     }

@@ -13,9 +13,11 @@ namespace TowerDefense.SignalR.Models
         public int Position { get; set; }
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
+        public int MonsterType { get; set; }
 
         public static List<MonsterModel> GetMockedList()
         {
+            Random rnd = new Random();
             var monsters = new List<MonsterModel>();
             for (int i = 1; i <= 10; i++)
             {
@@ -24,7 +26,8 @@ namespace TowerDefense.SignalR.Models
                     MonsterIndex = i,
                     CurrentHealth = 100,
                     Loot = 5,
-                    Position = i * 2 - 20
+                    Position = i * 2 - 20,
+                    MonsterType = rnd.Next(1,4)
                 });
             }
             return monsters;
