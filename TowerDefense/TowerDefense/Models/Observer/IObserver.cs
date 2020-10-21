@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace TowerDefense.Models.Observer
 {
-    public interface IObserver
+    public interface IObserver<T>
     {
 
-        void Update(ISubject subject);
+        void Update(T data);
+
     }
 }

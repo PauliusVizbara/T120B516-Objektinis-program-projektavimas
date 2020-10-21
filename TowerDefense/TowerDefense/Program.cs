@@ -6,42 +6,87 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using TowerDefense.Models.MapFactory;
+using TowerDefense.Decorator;
+using TowerDefense.Models.Factory;
+using TowerDefense.Models.Factory.Creators;
 using TowerDefense.Models.Observer;
-using TowerDefense.Models.TowerFactory;
 
 namespace TowerDefense
 {
     public class Program
     {
+
+        private static TowerCreator factory;
+
+        private static CTower tower;
+
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
 
-            ScoreSystem scoreSystem = new ScoreSystem();
-            Score score = new Score();
-            scoreSystem.Attach(score);
-            scoreSystem.Score = 100;
-            scoreSystem.Score = 110;
-            scoreSystem.Score = 120;
-            scoreSystem.Score = 130;
+            Console.WriteLine("Please select: bo(mber), ba(nk), m(age), f(reze)");
+
+            string input = Console.ReadLine();
+            switch (input.ToLower())
+            {
+                case "bo":
+                    factory = new BomberCreator(1, 50, "Offensive");
+                    break;
+                case "ba":
+                    factory = new BankCreator(100, "Support");
+                    break;
+                case "m":
+                    factory = new MageCreator(3, 25, "Offensive");
+                    break;
+                case "f":
+                    factory = new FreezeCreator(2, 10, "Support");
+                    break;
+                default:
+                    break;
+            }
+
+            tower = factory.createTower();
+
+            
+            Console.WriteLine("Tower details are below : ");
+            Console.WriteLine("Tower damage: {0} Tower Range {1} \n", tower.GetDamage(), tower.GetRange());
+
+
+            /*----Decorator------*/
+            DamageUpgrade towerDmgUp = new DamageUpgrade(tower);
+
+            Console.WriteLine("Tower details after damage decorator: ");
+            Console.WriteLine("Tower damage: {0} Tower Range {1} \n", towerDmgUp.GetDamage(), towerDmgUp.GetRange());
+
+            DamageUpgrade towerRngUp = new DamageUpgrade(towerDmgUp);
+
+
+            Console.WriteLine("Tower details after range decorator: ");
+            Console.WriteLine("Tower damage: {0} Tower Range {1} \n", towerRngUp.GetDamage(), towerRngUp.GetRange());
+
+            /*----Observer------*/
+            //Subject
+            var scoreSubject = new Observable<Score>();
+            //Observer
+            var scoreObserverA = new ScoreObserver();
+            var scoreObserverB = new ScoreObserver();
+
+            scoreSubject.Attach(scoreObserverA);
+            scoreSubject.Attach(scoreObserverA);
+
+            Score score1 = new Score("Game Score", 100);
+            scoreSubject.Subject = score1;
+            scoreSubject.Detach(scoreObserverA);
+            Score score2 = new Score("Game Score", 100 + 1);
+            scoreSubject.Subject = score2;
 
 
 
-            TowerCreator towerCreator = new TowerCreator();
 
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            data.Add("ID", 1);
-            BomberTower bomberTower = towerCreator.Get(TowerType.BomberTower, data) as BomberTower;
-            GunerTower gunerTower = towerCreator.Get(TowerType.GunerTower, data) as GunerTower;
-            FreezerTower freezerTower = towerCreator.Get(TowerType.FreezerTower, data) as FreezerTower;
-            BankTower bankTower = towerCreator.Get(TowerType.BankTower, data) as BankTower;
+            Console.ReadKey();
 
-            Console.WriteLine(bomberTower.getInfo());
-            Console.WriteLine(gunerTower.getInfo());
-            Console.WriteLine(freezerTower.getInfo());
-            Console.WriteLine(bankTower.getInfo());
-            Console.ReadLine();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace TowerDefense.Models.Observer
 {
-    public class Score : IObserver
+    public class Score
     {
-
-        public void Update(ISubject subject)
+        public string name { get; set; }
+        public int score { get; set; }
+        public Score(string name, int value)
         {
-            if (subject is ScoreSystem scoreSystem)
-            {
-                Console.WriteLine(String.Format("The score is {0}", scoreSystem.Score));
-            }
+            this.name = name;
+            this.score = value;
         }
     }
 }
