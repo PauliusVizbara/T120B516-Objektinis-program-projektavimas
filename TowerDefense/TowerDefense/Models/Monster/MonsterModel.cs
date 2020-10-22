@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TowerDefense.SignalR.Models
+namespace TowerDefense.Models.Monster
 {
-    public class MonsterModel
+    public class Monster
     {
         public int MonsterIndex { get; set; }
         public double CurrentHealth { get; set; }
@@ -15,13 +15,13 @@ namespace TowerDefense.SignalR.Models
         public int YCoordinate { get; set; }
         public int MonsterType { get; set; }
 
-        public static List<MonsterModel> GetMockedList()
+        public static List<Monster> GetMockedList()
         {
             Random rnd = new Random();
-            var monsters = new List<MonsterModel>();
+            var monsters = new List<Monster>();
             for (int i = 1; i <= 10; i++)
             {
-                monsters.Add(new MonsterModel
+                monsters.Add(new Monster
                 {
                     MonsterIndex = i,
                     CurrentHealth = 100,
