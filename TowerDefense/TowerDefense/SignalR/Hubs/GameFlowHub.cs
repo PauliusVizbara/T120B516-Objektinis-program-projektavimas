@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using TowerDefense.Data.Repository.Abstraction;
 using TowerDefense.GameManagerSingleton;
+using TowerDefense.Models.Factory.Creators;
+using TowerDefense.Models.Factory;
 using TowerDefense.SignalR.GameFlowHelpers;
 using TowerDefense.SignalR.Models;
 
@@ -34,6 +36,44 @@ namespace TowerDefense.SignalR.Hubs
                 gameFlowHelper.MoveMonstersPosition(gameStatusModel.MonsterList);
                 await Clients.All.SendAsync("GameStatus", gameStatusModel);
                 Thread.Sleep(1000);
+            }
+        }
+
+        public async Task RequestBuildTower(int x, int y, string towerType)
+        {
+            System.Diagnostics.Debug.WriteLine(x);
+            System.Diagnostics.Debug.WriteLine(y);
+            System.Diagnostics.Debug.WriteLine(towerType);
+            Tower tower = null;
+            switch (towerType)
+            {
+                case "Archer":
+                    tower = new ArcherCreator(10, 20, "physical").createTower();
+                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    break;
+
+                case "Bomber":
+                    tower = new BomberCreator(10, 20, "physical").createTower();
+                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    break;
+
+                case "Freeze":
+                    tower = new FreezeCreator(10, 20, "physical").createTower();
+                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    break;
+
+                case "Mage":
+                     tower = new MageCreator(10, 20, "physical").createTower();
+                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    break;
+
+                case "Bank":
+                    tower = new BankCreator(10, "physical").createTower();
+                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    break;
+                default:
+                    System.Diagnostics.Debug.WriteLine("Didn't found the tower type");
+                    break;
             }
         }
 

@@ -6,21 +6,21 @@ namespace TowerDefense.Models.Factory.Towers
 {
     class BankTower : Tower
     {
-        private readonly string name;
-        public int money;
-        public string type;
+        public string Name { get; set; }
+        public int Money { get; set; }
+        public string Type { get; set; }
 
         public BankTower(int money, string type)
         {
-            this.name = "Bank";
-            this.money = money;
-            this.type = type;
+            this.Name = "Bank";
+            this.Money = money;
+            this.Type = type;
         }
 
 
         public override String getInfo()
         {
-            return String.Format("Name: {0}, Money create every round {1} Type is {2}", name, money, type);
+            return String.Format("Name: {0}, Money create every round {1} Type is {2}", Name, Money, Type);
         }
 
         public override int GetDamage()

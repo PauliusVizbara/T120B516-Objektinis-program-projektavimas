@@ -3,26 +3,51 @@
 @{
     Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
-<div class="game-wrapper">
-    <div id="controls">
-        <h2>Score</h2>
-        <div id="score-tracker">
-            <div class="tracker"><img alt="health" src="~/images/healthIcon.png" />100</div>
-            <div class="tracker"><img alt="gold" src="~/images/goldIcon.png" />2500</div>
+
+<button id="start-game-button" class="button secondary">Start game</button>
+<div id="resource-panel">
+    <div class="resource"><img src="~/images/scoreIcon.png" /><span>50</span></div>
+    <div class="resource"><img src="~/images/goldIcon.png" /><span>100</span></div>
+    <div class="resource"><img src="~/images/healthIcon.png" /><span>10000</span></div>
+</div>
+
+<div id="ui-container">
+    <div class="tower-building-menu menu">
+        <button class="close-button" onclick="this.parentNode.classList.remove('show')">X</button>
+        <h2>Build tower</h2>
+        <div class="stat">
+            <span>X: </span> <span class="tower-building-menu-x"></span>
         </div>
-        <h2>Actions</h2>
-        <button id="start-game-button">Start game</button>
-        <h2>Towers</h2>
-        <div id="unit-selector">
-            <button class="selector active" id="archer-tower"></button>
-            <button class="selector" id="mage-tower"></button>
-            <button class="selector" id="bomb-tower"></button>
+        <div class="stat">
+            <span>Y: </span> <span class="tower-building-menu-y"></span>
         </div>
-        <h2>Upgrades</h2>
+        <button type="button" onclick="requestTowerBuild(+this.parentNode.getAttribute('data-x'),+this.parentNode.getAttribute('data-y'),'Archer')">Archer tower</button>
+        <button type="button" onclick="requestTowerBuild(+this.parentNode.getAttribute('data-x'),+this.parentNode.getAttribute('data-y'),'Bomber')">Bomber tower</button>
+        <button type="button" onclick="requestTowerBuild(+this.parentNode.getAttribute('data-x'),+this.parentNode.getAttribute('data-y'),'Mage')">Mage tower</button>
+        <button type="button" onclick="requestTowerBuild(+this.parentNode.getAttribute('data-x'),+this.parentNode.getAttribute('data-y'),'Bank')">Bank tower</button>
+        <button type="button" onclick="requestTowerBuild(+this.parentNode.getAttribute('data-x'),+this.parentNode.getAttribute('data-y'),'Freeze')">Freeze tower</button>
     </div>
-    <div id="game-grid">
+
+    <div class="monster-info menu">
+        <button class="close-button" onclick="this.parentNode.classList.remove('show')">X</button>
+        <h2>Monster info</h2>
+        <div class="stat">
+            <span>X: </span> <span class="tower-building-menu-x"></span>
+        </div>
+        <div class="stat">
+            <span>Y: </span> <span class="tower-building-menu-y"></span>
+        </div>
+    </div>
+
+    <div class="tower-info-menu menu">
+        <button class="close-button" onclick="this.parentNode.classList.remove('show')">X</button>
+        <h2>Tower info</h2>
+        <div class="stat">
+            <span>X: </span> <span class="tower-building-menu-x"></span>
+        </div>
+        <div class="stat">
+            <span>Y: </span> <span class="tower-building-menu-y"></span>
+        </div>
     </div>
 </div>
 
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/game.js"></script>
