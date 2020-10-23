@@ -26,17 +26,24 @@ namespace TowerDefense.SignalR.Hubs
         {
             gameManager.GameStart();
 
-            GameFlowOperations gameFlowHelper = new GameFlowOperations();
-
-            var gameStatusModel = new GameStatusModel();
+            Task.Factory.StartNew(() => GameFlow(Clients));
 
             await Clients.All.SendAsync("StartGame");
+            
+        }
+
+        private async Task<bool> GameFlow(IHubCallerClients clients)
+        {
+            GameFlowOperations gameFlowHelper = new GameFlowOperations();
+            var gameStatusModel = new GameStatusModel();
+
             while (gameManager.CurrentLevel() > 0)
             {
                 gameFlowHelper.MoveMonstersPosition(gameStatusModel.MonsterList);
-                await Clients.All.SendAsync("GameStatus", gameStatusModel);
+                await clients.All.SendAsync("GameStatus", gameStatusModel);
                 Thread.Sleep(1000);
             }
+            return true;
         }
 
         public async Task RequestBuildTower(int x, int y, string towerType)
