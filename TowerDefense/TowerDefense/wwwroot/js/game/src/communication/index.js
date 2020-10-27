@@ -14,12 +14,13 @@ connection.on('GameStatus', (data) => {
     const monsterList = data.monsterList
 
     monsterList.forEach(monster => {
-        const { monsterIndex: id, xCoordinate, yCoordinate } = monster
+        const { monsterIndex: id, xCoordinate, yCoordinate, monsterType } = monster
 
         if (tiles[yCoordinate - 1] && tiles[yCoordinate - 1][xCoordinate - 1]) {
             if (!monsters[id]) {
+                console.log(`monster${monsterType}`)
                 monsters[id] = new Entity({
-                    tile: tiles[xCoordinate - 1][yCoordinate - 1], sprite: sprites.monster1,
+                    tile: tiles[xCoordinate - 1][yCoordinate - 1], sprite: sprites[`monster${monsterType}`],
                     onClick: () => uiManager.showMonsterMenu(monster)
                 })
                 monsters[id].render()

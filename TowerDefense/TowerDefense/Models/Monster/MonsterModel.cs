@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TowerDefense.Models.Strategies;
+using TowerDefense.Models.Strategies.Movement;
 
 namespace TowerDefense.Models.Monster
 {
@@ -14,10 +16,11 @@ namespace TowerDefense.Models.Monster
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
         public int MonsterType { get; set; }
-
+        public MovementStrategy MovementMethod { get; set; }
         public static List<Monster> GetMockedList()
         {
             Random rnd = new Random();
+            var movementStrategies = new MovementStrategy[] { new GroundMovement(), new UnderGroundMovement(), new AirMovement()};
             var monsters = new List<Monster>();
             for (int i = 1; i <= 10; i++)
             {
@@ -27,7 +30,9 @@ namespace TowerDefense.Models.Monster
                     CurrentHealth = 100,
                     Loot = 5,
                     Position = i * 2 - 20,
-                    MonsterType = rnd.Next(1,4)
+                    MonsterType = rnd.Next(1,4),
+                    MovementMethod = movementStrategies[rnd.Next(0,3)]
+
                 });
             }
             return monsters;

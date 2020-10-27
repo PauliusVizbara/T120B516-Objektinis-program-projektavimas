@@ -65,37 +65,7 @@ for (let i = 0; i < tiles.length; i++) {
 
 const uiManager = new UIManager(document.getElementById('ui-container'))
 
-const sprites = {
-    monster1: {
-        spritePath: '/images/monsterTile1.png',
-        scale: [0.3,0.3],
-    },
-    Archer: {
-        spritePath: '/images/archer-tower.png',
-        scale: [0.2, 0.2],
-        pivot: [0.5, 0.9],
-    },
-    Freeze: {
-        spritePath: '/images/archer-tower.png',
-        scale: [0.2, 0.2],
-        pivot: [0.5, 0.9],
-    },
-    Bomber: {
-        spritePath: '/images/bomb-tower.png',
-        scale: [0.2, 0.2],
-        pivot: [0.5, 0.9],
-    },
-    Bank: {
-        spritePath: '/images/archer-tower.png',
-        scale: [0.2, 0.2],
-        pivot: [0.5, 0.9],
-    },
-    Mage: {
-        spritePath: '/images/mage-tower.png',
-        scale: [0.2, 0.2],
-        pivot: [0.5, 0.9],
-    }
-}
+
 
 //new Entity({ tile: tiles[1][1], sprite: sprites.monster1 }).render()
 //new Entity({ tile: tiles[3][1], sprite: sprites.monster1 }).render()
