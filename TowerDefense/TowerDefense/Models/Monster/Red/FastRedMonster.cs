@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TowerDefense.Models.Strategies;
+using TowerDefense.Models.Strategies.Movement;
 
 namespace TowerDefense.Models.Monster.Red
 {
@@ -24,6 +25,46 @@ namespace TowerDefense.Models.Monster.Red
             this.SetCurrentHealth(health);
             this.SetLoot(loot);
             this.SetMonsterType("Red Fast Monster");
+            this.SetMovementMethod(new AirMovement());
+        }
+        public override int GetXCoordinate()
+        {
+            return XCoordinate;
+        }
+
+        public override void SetXCoordinate(int value)
+        {
+            XCoordinate = value;
+        }
+
+        public override int GetYCoordinate()
+        {
+            return YCoordinate;
+        }
+
+        public override void SetYCoordinate(int value)
+        {
+            YCoordinate = value;
+        }
+
+        public override int GetPosition()
+        {
+            return Position;
+        }
+
+        public override void SetPosition(int value)
+        {
+            Position = value;
+        }
+
+        public override MovementStrategy GetMovementMethod()
+        {
+            return MovementMethod;
+        }
+
+        public void SetMovementMethod(MovementStrategy value)
+        {
+            MovementMethod = value;
         }
 
         public override int GetMonsterIndex()

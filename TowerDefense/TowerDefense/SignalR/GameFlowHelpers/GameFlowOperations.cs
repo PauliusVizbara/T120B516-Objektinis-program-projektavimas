@@ -16,7 +16,7 @@ namespace TowerDefense.SignalR.GameFlowHelpers
         {      
             foreach (var monster in monsters)
             {
-                monster.MovementMethod.Move(monster);
+                monster.GetMovementMethod().Move(monster);
             }
         }
     }

@@ -10,6 +10,7 @@ using TowerDefense.Models.Factory.Creators;
 using TowerDefense.Models.Factory;
 using TowerDefense.SignalR.GameFlowHelpers;
 using TowerDefense.SignalR.Models;
+using TowerDefense.Models.Monster;
 
 namespace TowerDefense.SignalR.Hubs
 {
@@ -36,14 +37,40 @@ namespace TowerDefense.SignalR.Hubs
         {
             GameFlowOperations gameFlowHelper = new GameFlowOperations();
             var gameStatusModel = new GameStatusModel();
+            List<Monster> monsters = GetMockedList();
 
             while (gameManager.CurrentLevel() > 0)
             {
-                gameFlowHelper.MoveMonstersPosition(gameStatusModel.MonsterList);
+                gameFlowHelper.MoveMonstersPosition(monsters);
                 await clients.All.SendAsync("GameStatus", gameStatusModel);
                 Thread.Sleep(1000);
             }
             return true;
+        }
+
+        public List<Monster> GetMockedList()
+        {
+            AbstractFactory fastFactory = new FastFactory();
+            AbstractFactory strongFactory = new StrongFactory();
+            AbstractFactory weakFactory = new WeakFactory();
+            var monsters = new List<Monster>();
+            for (int i = 1; i < 10; i++)
+            {
+                var weakmonster = weakFactory.CreateRedMonster(i);
+                weakmonster.SetPosition(i * 2 - 20);
+                monsters.Add(weakmonster);
+                i++;
+
+                var fastmonster1 = fastFactory.CreateRedMonster(i);
+                fastmonster1.SetPosition(i * 2 - 20);
+                monsters.Add(fastmonster1);
+                i++;
+
+                var fastmonster2 = fastFactory.CreateRedMonster(i);
+                fastmonster2.SetPosition(i * 2 - 20);
+                monsters.Add(fastmonster2);
+            }
+            return monsters;
         }
 
         public async Task RequestBuildTower(int x, int y, string towerType)

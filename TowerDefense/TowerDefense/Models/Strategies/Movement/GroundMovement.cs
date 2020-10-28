@@ -14,10 +14,18 @@ namespace TowerDefense.Models.Strategies.Movement
         public override void Move(Monster.Monster monster)
         {
             var coordinates = gameManager.GetCoordinates();
-            monster.Position++;
-            var coordinatesByPosition = coordinates.FirstOrDefault(x => x.CoordinateIndex == monster.Position);
-            monster.XCoordinate = coordinatesByPosition != null ? coordinatesByPosition.XCoordinate : 0;
-            monster.YCoordinate = coordinatesByPosition != null ? coordinatesByPosition.YCoordinate : 0;                 
+            monster.SetPosition(monster.GetPosition() + 1);
+            var coordinatesByPosition = coordinates.FirstOrDefault(x => x.CoordinateIndex == monster.GetPosition());
+            if (coordinatesByPosition != null)
+            {
+                monster.SetXCoordinate(coordinatesByPosition.XCoordinate);
+                monster.SetYCoordinate(coordinatesByPosition.YCoordinate);
+            }
+            else
+            {
+                monster.SetXCoordinate(0);
+                monster.SetYCoordinate(0);
+            }
         }
     }
 }

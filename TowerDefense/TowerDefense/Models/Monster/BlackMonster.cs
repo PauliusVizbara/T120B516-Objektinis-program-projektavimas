@@ -5,14 +5,8 @@ using System.Threading.Tasks;
 
 namespace TowerDefense.Models.Monster
 {
-    public abstract class BlackMonster
+    public abstract class BlackMonster : Monster
     {
-        public abstract int GetMonsterIndex();
 
-        public abstract double GetCurrentHealth();
-
-        public abstract int GetLoot();
-
-        public abstract string GetMonsterType();
     }
 }
