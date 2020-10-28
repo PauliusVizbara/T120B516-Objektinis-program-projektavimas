@@ -2,15 +2,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TowerDefense.Models.Strategies;
 
 namespace TowerDefense.Models.Monster.Black
 {
     public class FastBlackMonster : BlackMonster
     {
+        public int MonsterIndex { get; set; }
+        public double CurrentHealth { get; set; }
+        public int Loot { get; set; }
+        public int Position { get; set; }
+        public int XCoordinate { get; set; }
+        public int YCoordinate { get; set; }
+        public string MonsterType { get; set; }
+        public MovementStrategy MovementMethod { get; set; }
 
-        public override double Health()
+        public FastBlackMonster(int index, int health, int loot)
         {
-            return 120;
+            this.SetMonsterIndex(index);
+            this.SetCurrentHealth(health);
+            this.SetLoot(loot);
+            this.SetMonsterType("Black Fast Monster");
+        }
+
+        public override int GetMonsterIndex()
+        {
+            return MonsterIndex;
+        }
+
+        public void SetMonsterIndex(int value)
+        {
+            MonsterIndex = value;
+        }
+
+        public override double GetCurrentHealth()
+        {
+            return CurrentHealth;
+        }
+
+        public void SetCurrentHealth(double value)
+        {
+            CurrentHealth = value;
+        }
+
+        public override int GetLoot()
+        {
+            return Loot;
+        }
+
+        public void SetLoot(int value)
+        {
+            Loot = value;
+        }
+
+        public override string GetMonsterType()
+        {
+            return MonsterType;
+        }
+
+        public void SetMonsterType(string value)
+        {
+            MonsterType = value;
         }
     }
 }

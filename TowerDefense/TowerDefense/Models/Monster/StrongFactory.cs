@@ -9,14 +9,14 @@ namespace TowerDefense.Models.Monster
 {
     class StrongFactory : AbstractFactory
     {
-        public override BlackMonster CreateBlackMonster()
+        public override BlackMonster CreateBlackMonster(int index)
         {
-            return new FastBlackMonster();
+            return new FastBlackMonster(index, 150, 5);
         }
 
-        public override RedMonster CreateRedMonster()
+        public override RedMonster CreateRedMonster(int index)
         {
-            return new FastRedMonster();
+            return new FastRedMonster(index, 120, 5);
         }
 
     }

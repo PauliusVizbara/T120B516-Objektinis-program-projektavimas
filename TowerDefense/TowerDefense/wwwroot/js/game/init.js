@@ -2,9 +2,9 @@ PIXI.utils.skipHello();
 
 var app = new PIXI.Application({
     backgroundColor: 0x11151C,
-    antialias: true,
+    antialias: false,
     autoDensity: true,
-    resolution: 2
+    resolution: 1
 })
 
 const viewport = new Viewport.Viewport({

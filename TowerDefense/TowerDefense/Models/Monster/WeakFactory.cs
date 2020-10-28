@@ -10,14 +10,14 @@ namespace TowerDefense.Models.Monster
     class WeakFactory :AbstractFactory
     {
 
-        public override BlackMonster CreateBlackMonster()
+        public override BlackMonster CreateBlackMonster(int index)
         {
-            return new WeakBlackMonster();
+            return new WeakBlackMonster(index, 90, 5);
         }
 
-        public override RedMonster CreateRedMonster()
+        public override RedMonster CreateRedMonster(int index)
         {
-            return new WeakRedMonster();
+            return new WeakRedMonster(index, 60, 5);
         }
     }
 }

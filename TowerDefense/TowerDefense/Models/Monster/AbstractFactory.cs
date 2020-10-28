@@ -7,8 +7,8 @@ namespace TowerDefense.Models.Monster
 {
     abstract class AbstractFactory
     {
-        public abstract BlackMonster CreateBlackMonster();
-        public abstract RedMonster CreateRedMonster();
+        public abstract BlackMonster CreateBlackMonster(int index);
+        public abstract RedMonster CreateRedMonster(int index);
 
     }
 }
