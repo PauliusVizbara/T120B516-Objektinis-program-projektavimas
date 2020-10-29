@@ -13,8 +13,34 @@ namespace TowerDefense.SignalR.Models
         
         public GameStatusModel()
         {
-            //MonsterList = Monster.GetMockedList();
+            List<Monster> monsters = GetMockedList();
+            MonsterList = monsters;
             UserList = new List<UserModel>();
+        }
+
+        public List<Monster> GetMockedList()
+        {
+            AbstractFactory fastFactory = new FastFactory();
+            AbstractFactory strongFactory = new StrongFactory();
+            AbstractFactory weakFactory = new WeakFactory();
+            var monsters = new List<Monster>();
+            for (int i = 1; i < 10; i++)
+            {
+                var weakmonster = weakFactory.CreateRedMonster(i);
+                weakmonster.SetPosition(i * 2 - 20);
+                monsters.Add(weakmonster);
+                i++;
+
+                var fastmonster1 = fastFactory.CreateRedMonster(i);
+                fastmonster1.SetPosition(i * 2 - 20);
+                monsters.Add(fastmonster1);
+                i++;
+
+                var fastmonster2 = fastFactory.CreateRedMonster(i);
+                fastmonster2.SetPosition(i * 2 - 20);
+                monsters.Add(fastmonster2);
+            }
+            return monsters;
         }
 
 

@@ -37,11 +37,12 @@ namespace TowerDefense.SignalR.Hubs
         {
             GameFlowOperations gameFlowHelper = new GameFlowOperations();
             var gameStatusModel = new GameStatusModel();
-            List<Monster> monsters = GetMockedList();
+            //List<Monster> monsters = GetMockedList();
+
 
             while (gameManager.CurrentLevel() > 0)
             {
-                gameFlowHelper.MoveMonstersPosition(monsters);
+                gameFlowHelper.MoveMonstersPosition(gameStatusModel.MonsterList);
                 await clients.All.SendAsync("GameStatus", gameStatusModel);
                 Thread.Sleep(1000);
             }

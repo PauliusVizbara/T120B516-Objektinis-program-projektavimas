@@ -24,7 +24,7 @@ namespace TowerDefense.Models.Monster.Black
 
         public string MonsterType { get; set; }
 
-        private MovementStrategy MovementMethod;
+        public MovementStrategy MovementMethod;
 
         
 
