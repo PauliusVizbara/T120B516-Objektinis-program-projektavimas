@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TowerDefense.Data;
+using TowerDefense.Models.Tower;
 
 namespace TowerDefense.GameManagerSingleton
 {
@@ -14,6 +15,7 @@ namespace TowerDefense.GameManagerSingleton
         //private List<MapPathCoordinate> _currentMap = new List<MapPathCoordinate>();
         private static object syncLock = new object();
         private List<MapPathCoordinate> Coordinates = new List<MapPathCoordinate>();
+        public List<BuiltTower> Towers = new List<BuiltTower>();
 
         protected GameManager()
         {
@@ -35,6 +37,17 @@ namespace TowerDefense.GameManagerSingleton
 
             return _instance;
         }
+
+        public void AddTower(int xCoordinate, int yCoordinate, string towerType)
+        {
+            Towers.Add(new BuiltTower
+            {
+                TowerType = towerType,
+                xCoordinate = xCoordinate,
+                yCoordinate = yCoordinate
+            });
+        }
+
         public int CurrentLevel()
         {
             return _currentLevel;
