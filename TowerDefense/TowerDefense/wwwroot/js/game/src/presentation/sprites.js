@@ -5,11 +5,12 @@
     },
     monster2: {
         spritePath: '/images/monsterTile2.png',
-        scale: [0.3, 0.3],
+        scale: [0.11, 0.11],
     },
     monster3: {
         spritePath: '/images/monsterTile3.png',
         scale: [0.3, 0.3],
+        pivot: [0.5, 1.6],
     },
     monster4: {
         spritePath: '/images/monsterTile1.png',
@@ -39,5 +40,13 @@
         spritePath: '/images/mage-tower.png',
         scale: [0.2, 0.2],
         pivot: [0.5, 0.9],
-    }
+    },
+    tree: {
+        spritePath: '/images/tree1.png',
+        scale: [0.1, 0.1],
+    },
+    ship1: {
+        spritePath: '/images/ship1.png',
+        scale: [0.5, 0.5],
+    },
 }
