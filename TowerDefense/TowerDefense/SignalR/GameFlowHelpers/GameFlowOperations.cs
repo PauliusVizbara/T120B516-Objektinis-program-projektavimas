@@ -12,9 +12,9 @@ namespace TowerDefense.SignalR.GameFlowHelpers
 {
     public class GameFlowOperations
     {
-        public void GameTickOperations(List<Monster> monsters, List<BuiltTower> towers)
+        public void GameTickOperations(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers)
         {
-            DoDamage(monsters, towers);
+            DoDamage(monsters, deadMonsters, towers);
             MoveMonsters(monsters);            
         }
 
@@ -26,9 +26,8 @@ namespace TowerDefense.SignalR.GameFlowHelpers
             }
         }
 
-        private void DoDamage(List<Monster> monsters, List<BuiltTower> towers)
+        private void DoDamage(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers)
         {
-            List<Monster> deadMonsters = new List<Monster>();
             foreach (var tower in towers)
             {
                 foreach (var monster in monsters)

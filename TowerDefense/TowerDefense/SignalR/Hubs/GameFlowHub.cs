@@ -38,7 +38,7 @@ namespace TowerDefense.SignalR.Hubs
             GameFlowOperations gameFlowHelper = new GameFlowOperations();
             while (gameManager.CurrentLevel() > 0)
             {
-                gameFlowHelper.GameTickOperations(gameStatusModel.MonsterList, gameManager.Towers);
+                gameFlowHelper.GameTickOperations(gameStatusModel.MonsterList, gameStatusModel.DeadMonstersList, gameManager.Towers);
                 await clients.All.SendAsync("GameStatus", gameStatusModel);
                 Thread.Sleep(1000);
             }
