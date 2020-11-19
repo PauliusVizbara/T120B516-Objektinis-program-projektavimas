@@ -16,6 +16,7 @@ namespace TowerDefense.SignalR.Hubs
     public class GameFlowHub : Hub
     {
         GameManager gameManager = GameManager.GetGameManager();
+        GameStatusModel gameStatusModel = new GameStatusModel();
 
         public async Task SendGameStatus()
         {
@@ -35,11 +36,9 @@ namespace TowerDefense.SignalR.Hubs
         private async Task<bool> GameFlow(IHubCallerClients clients)
         {
             GameFlowOperations gameFlowHelper = new GameFlowOperations();
-            var gameStatusModel = new GameStatusModel();
-
             while (gameManager.CurrentLevel() > 0)
             {
-                gameFlowHelper.MoveMonstersPosition(gameStatusModel.MonsterList);
+                gameFlowHelper.GameTickOperations(gameStatusModel.MonsterList, gameStatusModel.DeadMonstersList, gameManager.Towers);
                 await clients.All.SendAsync("GameStatus", gameStatusModel);
                 Thread.Sleep(1000);
             }
@@ -51,6 +50,7 @@ namespace TowerDefense.SignalR.Hubs
             System.Diagnostics.Debug.WriteLine(x);
             System.Diagnostics.Debug.WriteLine(y);
             System.Diagnostics.Debug.WriteLine(towerType);
+            gameManager.AddTower(x, y, towerType);
             Tower tower = null;
             switch (towerType)
             {

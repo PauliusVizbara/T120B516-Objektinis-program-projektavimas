@@ -45,13 +45,35 @@ const pathTiles = [
     {x: 13, y: 4}, {x: 14, y: 4},
 ]
 
+const waterTiles = [
+    { x: 1, y: 10 }, { x: 2, y: 10 },
+    { x: 3, y: 10 }, { x: 4, y: 10 },
+    { x: 2, y: 11 }, { x: 3, y: 11 },
+    { x: 2, y: 11 }, { x: 3, y: 11 },
+    { x: 3, y: 9 },
+]
+
+const obstacles = [
+    { x: 10, y: 10, sprite: sprites.tree},
+    { x: 11, y: 8, sprite: sprites.tree},
+    { x: 13, y: 10, sprite: sprites.tree},
+    { x: 7, y: 9, sprite: sprites.tree },
+    { x: 2, y: 11, sprite: sprites.ship1}
+]
 
 for (let cellX = 0; cellX < mapSize; cellX++) {
     for (let cellY = 0; cellY < mapSize; cellY++) {
         const X = startingX - cellY * cellSize
         const Y = startingY + ((cellSize + cellHeight) / 2) * cellY
-        const tileType = !!pathTiles.find(({x, y}) => cellY === y && cellX === x) ? 'path' : 'ground'
-        tiles[cellX][cellY] = new Tile({x: cellX, y: cellY, stage: stage, tileRenderPoint: {x: X, y: Y}, type: tileType})
+        let tileType = 'ground'
+        if (pathTiles.find(({ x, y }) => cellY === y && cellX === x)) tileType = 'path'
+        if (waterTiles.find(({ x, y }) => cellY === y && cellX === x)) tileType = 'water'
+        const tileBuilder = new TileBuilder()
+        tileBuilder.startNew({ x: cellX, y: cellY, stage: stage, tileRenderPoint: { x: X, y: Y } })
+        tileBuilder.addTileType(tileType)
+        const obstacle = obstacles.find(({ x, y }) => cellY === y && cellX === x)
+        if (obstacle) tileBuilder.addObstacle(obstacle.sprite)
+        tiles[cellX][cellY] = tileBuilder.build()
     }
     startingX += cellSize
     startingY += ((cellSize + cellHeight) / 2)
@@ -67,7 +89,7 @@ const uiManager = new UIManager(document.getElementById('ui-container'))
 
 
 
-//new Entity({ tile: tiles[1][1], sprite: sprites.monster1 }).render()
+//new Entity({ tile: tiles[1][1], sprite: sprites.monster3 }).render()
 //new Entity({ tile: tiles[3][1], sprite: sprites.monster1 }).render()
 
 //new Entity({ tile: tiles[6][6], sprite: sprites.archerTower, onClick: () => { uiManager.showTowerInfoMenu({})}}).render()

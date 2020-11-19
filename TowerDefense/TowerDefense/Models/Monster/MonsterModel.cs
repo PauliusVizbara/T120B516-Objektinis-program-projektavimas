@@ -24,14 +24,15 @@ namespace TowerDefense.Models.Monster
             var monsters = new List<Monster>();
             for (int i = 1; i <= 10; i++)
             {
+                int randomMonsterType = rnd.Next(1, 4);
                 monsters.Add(new Monster
                 {
                     MonsterIndex = i,
                     CurrentHealth = 100,
                     Loot = 5,
                     Position = i * 2 - 20,
-                    MonsterType = rnd.Next(1,4),
-                    MovementMethod = movementStrategies[rnd.Next(0,3)]
+                    MonsterType = randomMonsterType,
+                    MovementMethod = movementStrategies[randomMonsterType-1]
 
                 });
             }
