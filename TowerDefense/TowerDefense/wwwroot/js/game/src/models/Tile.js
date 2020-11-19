@@ -3,7 +3,7 @@ class Tile {
     colors = {
         ground: [0x59CD90, 0x37AB70, 0x257750],
         path: [0xb27826, 0x966520, 0x5e3f14],
-        water: [0x0bbebe, 0x0bb, 0x066]
+        water: [0x0bbebe, 0x0bbebe, 0x0bbebe]
     }
     constructor(data) {
         const { stage, x, y, tileRenderPoint, entityRenderPoint, type, spriteData } = data
