@@ -18,7 +18,7 @@ namespace TowerDefense.SignalR.GameFlowHelpers
             MoveMonsters(monsters);            
         }
 
-        private void MoveMonsters(List<Monster> monsters)
+        public void MoveMonsters(List<Monster> monsters)
         {
             foreach (var monster in monsters)
             {
