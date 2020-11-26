@@ -31,7 +31,8 @@ connection.on('GameStatus', (data) => {
                 monsters[id] = new Entity({
                     currentHealth,
                     tile: tiles[xCoordinate - 1][yCoordinate - 1], sprite: sprites[`monster${monsterType}`],
-                    onClick: () => uiManager.showMonsterMenu(monster)
+                    onClick: () => uiManager.showMonsterMenu(monster),
+                    renderBuilder: MonsterRenderBuilder,
                 })
                 monsters[id].render()
             }
@@ -54,7 +55,8 @@ connection.on('BuildTower', (x, y, data) => {
     console.log(data, sprites[data.name])
     const tower = new Entity({
         tile: tiles[x][y], sprite: sprites[data.name],
-        onClick: () => uiManager.showTowerInfoMenu({ x, y, ...data })
+        onClick: () => uiManager.showTowerInfoMenu({ x, y, ...data }),
+        renderBuilder: TowerRenderBuilder,
     })
     tower.render()
 })

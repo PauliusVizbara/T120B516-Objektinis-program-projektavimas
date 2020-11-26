@@ -27,6 +27,8 @@ class UIManager {
         this.hideMenus()
         const menu = this.menus['tower-info-menu']
         menu.classList.add('show')
+        menu.getElementsByClassName('tower-info-menu-x')[0].innerText = data.x
+        menu.getElementsByClassName('tower-info-menu-y')[0].innerText = data.y
         Object.entries(data).forEach(([key, value]) => menu.setAttribute(`data-${key}`, value))
 
     }
