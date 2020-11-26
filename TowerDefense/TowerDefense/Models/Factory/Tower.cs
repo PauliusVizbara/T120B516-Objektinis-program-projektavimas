@@ -5,7 +5,7 @@ using TowerDefense.Decorator;
 
 namespace TowerDefense.Models.Factory
 {
-    abstract class Tower : CTower
+    public abstract class Tower : CTower
     {
         
     }

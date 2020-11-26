@@ -9,6 +9,8 @@ namespace TowerDefense.Decorator
         public abstract int GetDamage();
         public abstract int GetRange();
 
+        public abstract int GetMoney();
+
         public abstract String getInfo();
     }
 }

@@ -5,7 +5,7 @@ using TowerDefense.Models.Factory.Towers;
 
 namespace TowerDefense.Models.Factory.Creators
 {
-    class BomberCreator : TowerCreator
+    public class BomberCreator : TowerCreator
     {
         private int range;
         private int damage;

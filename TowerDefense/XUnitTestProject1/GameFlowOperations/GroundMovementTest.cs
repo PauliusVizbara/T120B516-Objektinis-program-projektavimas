@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TowerDefense.Models.Factory;
 using TowerDefense.Models.Monster;
 using TowerDefense.Models.Strategies.Movement;
 using Xunit;

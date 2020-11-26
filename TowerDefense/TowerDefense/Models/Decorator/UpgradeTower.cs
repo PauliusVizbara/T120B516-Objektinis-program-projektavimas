@@ -4,13 +4,15 @@ using System.Text;
 
 namespace TowerDefense.Decorator
 {
-    abstract class UpgradeTower : CTower
+    public abstract class UpgradeTower : CTower
     {
         CTower wrappee = null;
 
         protected int _Damage = 0;
 
         protected int _Range = 0;
+
+        protected int _Money = 0;
 
         protected UpgradeTower(CTower wrappee)
         {
@@ -26,6 +28,11 @@ namespace TowerDefense.Decorator
         public override int GetRange()
         {
             return (wrappee.GetRange() + _Range);
+        }
+
+        public override int GetMoney()
+        {
+            return (wrappee.GetMoney() + _Money);
         }
 
 

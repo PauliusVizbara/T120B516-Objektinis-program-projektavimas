@@ -5,8 +5,8 @@ using TowerDefense.Models.Factory.Towers;
 
 namespace TowerDefense.Models.Factory.Creators
 {
-    class FreezeCreator : TowerCreator
-    {
+    public class FreezeCreator : TowerCreator
+    { 
         private int range;
         private int damage;
         private string type;

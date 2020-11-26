@@ -7,7 +7,7 @@ using TowerDefense.Models.Monster.Red;
 
 namespace TowerDefense.Models.Monster
 {
-    class WeakFactory :AbstractFactory
+    public class WeakFactory :AbstractFactory
     {
 
         public override BlackMonster CreateBlackMonster(int index)

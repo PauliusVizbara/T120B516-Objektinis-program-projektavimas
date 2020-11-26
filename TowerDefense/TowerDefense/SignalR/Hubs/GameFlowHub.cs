@@ -27,7 +27,7 @@ namespace TowerDefense.SignalR.Hubs
         {
             gameManager.GameStart();
 
-            Task.Factory.StartNew(() => GameFlow(Clients));
+            await Task.Factory.StartNew(() => GameFlow(Clients));
 
             await Clients.All.SendAsync("StartGame");
             

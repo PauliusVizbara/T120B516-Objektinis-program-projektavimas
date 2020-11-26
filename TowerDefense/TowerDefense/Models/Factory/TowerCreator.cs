@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TowerDefense.Models.Factory
 {
-    abstract class TowerCreator
+    public abstract class TowerCreator
     {
         public abstract Tower createTower();
 

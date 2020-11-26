@@ -5,7 +5,7 @@ using TowerDefense.Models.Factory.Towers;
 
 namespace TowerDefense.Models.Factory.Creators
 {
-    class BankCreator : TowerCreator
+    public class BankCreator : TowerCreator
     {
         private int money;
         private string type;

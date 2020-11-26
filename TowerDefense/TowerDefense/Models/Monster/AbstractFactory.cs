@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefense.Models.Monster
 {
-    abstract class AbstractFactory
+    public abstract class AbstractFactory
     {
         public abstract BlackMonster CreateBlackMonster(int index);
         public abstract RedMonster CreateRedMonster(int index);

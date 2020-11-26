@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TowerDefense.Models.Factory.Towers
 {
-    class BankTower : Tower
+    public class BankTower : Tower
     {
         public string Name { get; set; }
         public int Money { get; set; }
@@ -21,6 +21,11 @@ namespace TowerDefense.Models.Factory.Towers
         public override String getInfo()
         {
             return String.Format("Name: {0}, Money create every round {1} Type is {2}", Name, Money, Type);
+        }
+
+        public override int GetMoney()
+        {
+            return Money;
         }
 
         public override int GetDamage()

@@ -18,7 +18,6 @@ namespace TowerDefense.Models.Strategies.Movement
             monster.XCoordinate = coordinatesByPosition != null ? coordinatesByPosition.XCoordinate : 0;
             monster.YCoordinate = coordinatesByPosition != null ? coordinatesByPosition.YCoordinate : 0;
 
-
         }
     }
 }

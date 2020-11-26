@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TowerDefense.Models.Factory.Towers
 {
-    class MageTower : Tower
+    public class MageTower : Tower
     {
         public string Name { get; set; }
         public int Range { get; set; }
@@ -33,6 +33,11 @@ namespace TowerDefense.Models.Factory.Towers
         public override int GetRange()
         {
             return Range;
+        }
+
+        public override int GetMoney()
+        {
+            throw new NotImplementedException();
         }
     }
 }
