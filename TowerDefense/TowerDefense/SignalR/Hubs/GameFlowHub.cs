@@ -15,25 +15,30 @@ namespace TowerDefense.SignalR.Hubs
 {
     public class GameFlowHub : Hub
     {
+        private IHubContext<GameFlowHub> _hubContext;
+        public GameFlowHub(IHubContext<GameFlowHub> hubContext)
+        {
+            _hubContext = hubContext;
+        }
         GameManager gameManager = GameManager.GetGameManager();
         GameStatusModel gameStatusModel = new GameStatusModel();
 
         public async Task SendGameStatus()
         {
-            await Clients.All.SendAsync("GameStatus");
+            await _hubContext.Clients.All.SendAsync("GameStatus");
         }
 
         public async Task StartGame()
         {
             gameManager.GameStart();
 
-            Task.Factory.StartNew(() => GameFlow(Clients));
+            Task.Factory.StartNew(() => GameFlow(_hubContext.Clients));
 
-            await Clients.All.SendAsync("StartGame");
+            await _hubContext.Clients.All.SendAsync("StartGame");
             
         }
 
-        private async Task<bool> GameFlow(IHubCallerClients clients)
+        private async Task<bool> GameFlow(IHubClients clients)
         {
             GameFlowOperations gameFlowHelper = new GameFlowOperations();
             while (gameManager.CurrentLevel() > 0)
@@ -56,27 +61,27 @@ namespace TowerDefense.SignalR.Hubs
             {
                 case "Archer":
                     tower = new ArcherCreator(10, 20, "physical").createTower();
-                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
                     break;
 
                 case "Bomber":
                     tower = new BomberCreator(10, 20, "physical").createTower();
-                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
                     break;
 
                 case "Freeze":
                     tower = new FreezeCreator(10, 20, "physical").createTower();
-                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
                     break;
 
                 case "Mage":
                      tower = new MageCreator(10, 20, "physical").createTower();
-                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
                     break;
 
                 case "Bank":
                     tower = new BankCreator(10, "physical").createTower();
-                    await Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
                     break;
                 default:
                     System.Diagnostics.Debug.WriteLine("Didn't found the tower type");
@@ -87,7 +92,7 @@ namespace TowerDefense.SignalR.Hubs
         public async Task EndGame()
         {
             gameManager.GameOver();
-            await Clients.All.SendAsync("GameOver");
+            await _hubContext.Clients.All.SendAsync("GameOver");
         }
     }
 }
