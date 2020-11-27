@@ -9,22 +9,23 @@
 </head>
 <body>
 
-    @RenderBody()
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.2.1/pixi.min.js"></script>
-    <script src="~/js/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/game/src/presentation/rendering.js"></script>
-    <script src="~/js/game/src/presentation/sprites.js"></script>
-    <script src="~/js/game/src/presentation/uiManager.js"></script>
-    <script src="~/js/game/src/models/Builder.js"></script>
-    <script src="~/js/game/src/models/TileBuilder.js"></script>
-    <script src="~/js/game/src/models/Tile.js"></script>
-    <script src="~/js/game/src/models/Entity.js"></script>
-    <script src="~/js/game/viewport.js"></script>
-    <script src="~/js/game/init.js"></script>
-    <script src="~/js/game/src/communication/index.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+	@RenderBody()
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.2.1/pixi.min.js"></script>
+	<script src="~/js/signalr/dist/browser/signalr.js"></script>
+	<script src="~/js/game/src/templateMethods/renderBuilder/index.js"></script>
+	<script src="~/js/game/src/presentation/rendering.js"></script>
+	<script src="~/js/game/src/presentation/sprites.js"></script>
+	<script src="~/js/game/src/presentation/uiManager.js"></script>
+	<script src="~/js/game/src/models/Builder.js"></script>
+	<script src="~/js/game/src/models/TileBuilder.js"></script>
+	<script src="~/js/game/src/models/Tile.js"></script>
+	<script src="~/js/game/src/models/Entity.js"></script>
+	<script src="~/js/game/viewport.js"></script>
+	<script src="~/js/game/init.js"></script>
+	<script src="~/js/game/src/communication/index.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@RenderSection("Scripts", required: false)
 </body>
 </html>
