@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TowerDefense.GameManagerSingleton;
 using TowerDefense.Models.Monster;
+using TowerDefense.Models.Observer;
 using TowerDefense.Models.Tower;
 using TowerDefense.SignalR.Models;
 
@@ -12,9 +13,9 @@ namespace TowerDefense.SignalR.GameFlowHelpers
 {
     public class GameFlowOperations
     {
-        public void GameTickOperations(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers)
+        public void GameTickOperations(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers, Observable<Score> scoreSubject)
         {
-            DoDamage(monsters, deadMonsters, towers);
+            DoDamage(monsters, deadMonsters, towers, scoreSubject);
             MoveMonsters(monsters);            
         }
 
@@ -26,7 +27,7 @@ namespace TowerDefense.SignalR.GameFlowHelpers
             }
         }
 
-        private void DoDamage(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers)
+        private void DoDamage(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers, Observable<Score> scoreSubject)
         {
             foreach (var tower in towers)
             {
@@ -39,12 +40,24 @@ namespace TowerDefense.SignalR.GameFlowHelpers
                     if (monster.CurrentHealth < 1)
                     {
                         deadMonsters.Add(monster); //TODO: Notify Score tracker
+
+                        scoreSubject.Notify();
+                        //ScoreUpdate(score, scoreSubject, monster.MonsterType);
                     }
                 }
             }
 
             monsters.RemoveAll(x => deadMonsters.Contains(x));
         }
+
+        //private void ScoreUpdate(Score score, Observable<Score> scoreSubject, string monsterType)
+        //{
+        //    int currentScore = score.GetScore();
+        //    score.ProcessScore(monsterType, currentScore);
+        //    scoreSubject.Subject = score;
+        //}
+
+
 
         private bool IsMonsterInRange(Monster monster, BuiltTower tower)
         {

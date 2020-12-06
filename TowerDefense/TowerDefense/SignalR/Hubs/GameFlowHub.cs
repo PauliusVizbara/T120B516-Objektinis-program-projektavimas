@@ -10,6 +10,7 @@ using TowerDefense.Models.Factory.Creators;
 using TowerDefense.Models.Factory;
 using TowerDefense.SignalR.GameFlowHelpers;
 using TowerDefense.SignalR.Models;
+using TowerDefense.Models.Observer;
 
 namespace TowerDefense.SignalR.Hubs
 {
@@ -22,6 +23,15 @@ namespace TowerDefense.SignalR.Hubs
         }
         GameManager gameManager = GameManager.GetGameManager();
         GameStatusModel gameStatusModel = new GameStatusModel();
+
+        Score smallScore = new SmallScore();
+        Score midScore = new MidScore();
+        Score bigScore = new BigScore();
+
+        Observable<Score> scoreSubject = new Observable<Score>();
+        ScoreObserver scoreObserver = new ScoreObserver();
+
+        
 
         public async Task SendGameStatus()
         {
@@ -41,9 +51,15 @@ namespace TowerDefense.SignalR.Hubs
         private async Task<bool> GameFlow(IHubClients clients)
         {
             GameFlowOperations gameFlowHelper = new GameFlowOperations();
+
+            smallScore.SetProccess(midScore);
+            midScore.SetProccess(bigScore);
+            
+            scoreSubject.Attach(scoreObserver);
+
             while (gameManager.CurrentLevel() > 0)
             {
-                gameFlowHelper.GameTickOperations(gameStatusModel.MonsterList, gameStatusModel.DeadMonstersList, gameManager.Towers);
+                gameFlowHelper.GameTickOperations(gameStatusModel.MonsterList, gameStatusModel.DeadMonstersList, gameManager.Towers, scoreSubject);
                 await clients.All.SendAsync("GameStatus", gameStatusModel);
                 Thread.Sleep(1000);
             }

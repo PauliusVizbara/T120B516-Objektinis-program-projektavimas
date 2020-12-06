@@ -8,7 +8,8 @@ namespace TowerDefense.Models.Observer
     {
         public void Update(Score data)
         {
-            Console.WriteLine(String.Format("The score is {0}", data.score));
+            Console.WriteLine(String.Format("The score is {0}", data.GetScore()));
+
         }
 
     }

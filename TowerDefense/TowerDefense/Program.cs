@@ -65,22 +65,6 @@ namespace TowerDefense
             Console.WriteLine("Tower details after range decorator: ");
             Console.WriteLine("Tower damage: {0} Tower Range {1} \n", towerRngUp.GetDamage(), towerRngUp.GetRange());
 
-            /*----Observer------*/
-            //Subject
-            var scoreSubject = new Observable<Score>();
-            //Observer
-            var scoreObserverA = new ScoreObserver();
-            var scoreObserverB = new ScoreObserver();
-
-            scoreSubject.Attach(scoreObserverA);
-            scoreSubject.Attach(scoreObserverA);
-
-            Score score1 = new Score("Game Score", 100);
-            scoreSubject.Subject = score1;
-            scoreSubject.Detach(scoreObserverA);
-            Score score2 = new Score("Game Score", 100 + 1);
-            scoreSubject.Subject = score2;
-
 
 
 
