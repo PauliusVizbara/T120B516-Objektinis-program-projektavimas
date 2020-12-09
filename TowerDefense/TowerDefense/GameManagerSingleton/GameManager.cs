@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TowerDefense.Data;
+using TowerDefense.Models.Observer;
 using TowerDefense.Models.Tower;
 
 namespace TowerDefense.GameManagerSingleton
@@ -12,6 +13,9 @@ namespace TowerDefense.GameManagerSingleton
     {
         private static GameManager _instance;
         private int _currentLevel = 0;
+        public Score smallScore = new SmallScore();
+        private Score midScore = new MidScore();
+        private Score bigScore = new BigScore();
         //private List<MapPathCoordinate> _currentMap = new List<MapPathCoordinate>();
         private static object syncLock = new object();
         private List<MapPathCoordinate> Coordinates = new List<MapPathCoordinate>();
@@ -65,6 +69,9 @@ namespace TowerDefense.GameManagerSingleton
 
         public void GameStart()
         {
+            smallScore.SetProccess(midScore);
+            midScore.SetProccess(bigScore);
+
             _currentLevel = 1;
         }
 

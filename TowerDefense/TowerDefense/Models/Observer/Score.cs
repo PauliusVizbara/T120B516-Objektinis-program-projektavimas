@@ -8,7 +8,7 @@ namespace TowerDefense.Models.Observer
     {
         protected Score nextScore;
         private string name;
-        private int score;
+        protected int score;
 
         public Score()
         {
@@ -21,9 +21,9 @@ namespace TowerDefense.Models.Observer
             this.nextScore = score;
         }
 
-        public abstract void AddScore(int score);
+        public abstract void AddScore();
 
-        public abstract void ProcessScore(string monsterType, int score);
+        public abstract void ProcessScore(int monsterType);
 
         public string GetName()
         {
