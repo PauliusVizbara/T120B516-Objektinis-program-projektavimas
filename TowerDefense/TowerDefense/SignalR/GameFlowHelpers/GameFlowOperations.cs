@@ -13,9 +13,9 @@ namespace TowerDefense.SignalR.GameFlowHelpers
 {
     public class GameFlowOperations
     {
-        public void GameTickOperations(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers, Observable<Score> scoreSubject)
+        public void GameTickOperations(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers)
         {
-            DoDamage(monsters, deadMonsters, towers, scoreSubject);
+            DoDamage(monsters, deadMonsters, towers);
             MoveMonsters(monsters);            
         }
 
@@ -27,7 +27,7 @@ namespace TowerDefense.SignalR.GameFlowHelpers
             }
         }
 
-        private void DoDamage(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers, Observable<Score> scoreSubject)
+        private void DoDamage(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers)
         {
             foreach (var tower in towers)
             {
@@ -40,9 +40,6 @@ namespace TowerDefense.SignalR.GameFlowHelpers
                     if (monster.CurrentHealth < 1)
                     {
                         deadMonsters.Add(monster); //TODO: Notify Score tracker
-
-                        scoreSubject.Notify();
-                        //ScoreUpdate(score, scoreSubject, monster.MonsterType);
                     }
                 }
             }
