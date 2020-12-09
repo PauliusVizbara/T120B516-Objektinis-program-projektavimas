@@ -40,6 +40,7 @@ namespace TowerDefense.SignalR.GameFlowHelpers
                     if (monster.CurrentHealth < 1)
                     {
                         deadMonsters.Add(monster); //TODO: Notify Score tracker
+                        monster.KillMonster();
                         ScoreUpdate(score, monster.MonsterType);
                     }
                 }
