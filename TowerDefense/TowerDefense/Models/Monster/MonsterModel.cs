@@ -15,7 +15,7 @@ namespace TowerDefense.Models.Monster
         public int Position { get; set; }
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
-        public string MonsterType { get; set; }
+        public int MonsterType { get; set; }
         public MovementStrategy MovementMethod { get; set; }
         public static List<Monster> GetMockedList()
         {
@@ -24,16 +24,15 @@ namespace TowerDefense.Models.Monster
             var monsters = new List<Monster>();
             for (int i = 1; i <= 10; i++)
             {
-                string[] mosterType = { "Strong", "Weak", "Fast" };
-                int randomMonsterType = rnd.Next(mosterType.Length);
+                int randomMonsterType = rnd.Next(1, 4);
                 monsters.Add(new Monster
                 {
                     MonsterIndex = i,
                     CurrentHealth = 100,
                     Loot = 5,
                     Position = i * 2 - 20,
-                    MonsterType = mosterType[randomMonsterType],
-                    MovementMethod = movementStrategies[randomMonsterType]
+                    MonsterType = randomMonsterType,
+                    MovementMethod = movementStrategies[randomMonsterType-1]
 
                 });
             }
