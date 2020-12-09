@@ -7,6 +7,15 @@
         spritePath: '/images/monsterTile2.png',
         scale: [0.11, 0.11],
     },
+    monsterFast: {
+        spritePath: '/images/monsterTile1.png',
+        scale: [0.3, 0.3],
+    },
+    monsterStrong: {
+        spritePath: '/images/monsterTile3.png',
+        scale: [0.3, 0.3],
+        pivot: [0.5, 1.6],
+    },
     monster3: {
         spritePath: '/images/monsterTile3.png',
         scale: [0.3, 0.3],
