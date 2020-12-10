@@ -55,11 +55,14 @@ const requestTowerBuild = (x, y, towerType) => {
     connection.invoke("RequestBuildTower", x, y, towerType)
 }
 
+const requestTowerUpgrade = (towerId, upgradeType) => {
+    uiManager.hideMenus()
+    connection.invoke("RequestUpgradeTower", towerId, upgradeType)
+}
 
 
 connection.on('BuildTower', (x, y, data, id) => {
-    console.log(data, sprites[data.name], id)
-    towers[id] = { x, y, ...data }
+    towers[id] = { x, y, ...data, id }
     const tower = new Entity({
         tile: tiles[x][y], sprite: sprites[data.name],
         onClick: () => uiManager.showTowerInfoMenu({ x, y, ...data, id }),

@@ -31,7 +31,7 @@ namespace TowerDefense.SignalR.Hubs
         Observable<Score> scoreSubject = new Observable<Score>();
         ScoreObserver scoreObserver = new ScoreObserver();
 
-        
+
 
         public async Task SendGameStatus()
         {
@@ -45,7 +45,7 @@ namespace TowerDefense.SignalR.Hubs
             Task.Factory.StartNew(() => GameFlow(_hubContext.Clients));
 
             await _hubContext.Clients.All.SendAsync("StartGame");
-            
+
         }
 
         private async Task<bool> GameFlow(IHubClients clients)
@@ -54,17 +54,39 @@ namespace TowerDefense.SignalR.Hubs
 
             smallScore.SetProccess(midScore);
             midScore.SetProccess(bigScore);
-            
+
             scoreSubject.Attach(scoreObserver);
 
             while (gameManager.CurrentLevel() > 0)
             {
-                System.Diagnostics.Debug.WriteLine(gameManager.Towers.Count);
+
                 gameFlowHelper.GameTickOperations(gameStatusModel.MonsterList, gameStatusModel.DeadMonstersList, gameManager.Towers);
                 await clients.All.SendAsync("GameStatus", gameStatusModel, gameManager.Towers);
                 Thread.Sleep(1000);
             }
             return true;
+        }
+
+        public async Task RequestUpgradeTower(int id, string upgradeType)
+        {
+            System.Diagnostics.Debug.WriteLine(id);
+            System.Diagnostics.Debug.WriteLine(upgradeType);
+            gameManager.Towers.ForEach(tower =>
+            {
+                if (tower.Id == id)
+                {
+                    switch (upgradeType)
+                    {
+                        case "Damage":
+                            tower.Damage += 34;
+                            break;
+                        case "Range":
+                            tower.Range += 9;
+                            break;
+
+                    }
+                }
+            });
         }
 
         public async Task RequestBuildTower(int x, int y, string towerType)
@@ -91,7 +113,7 @@ namespace TowerDefense.SignalR.Hubs
                     break;
 
                 case "Mage":
-                     tower = new MageCreator(10, 20, "physical").createTower();
+                    tower = new MageCreator(10, 20, "physical").createTower();
                     await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower, gameManager.Towers.Count);
                     break;
 
