@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TowerDefense.Data;
+using TowerDefense.Models.Factory;
 using TowerDefense.Models.Tower;
 
 namespace TowerDefense.GameManagerSingleton
@@ -38,13 +39,16 @@ namespace TowerDefense.GameManagerSingleton
             return _instance;
         }
 
-        public void AddTower(int xCoordinate, int yCoordinate, string towerType)
+        public void AddTower(int xCoordinate, int yCoordinate, string towerType, Tower tower)
         {
             Towers.Add(new BuiltTower
             {
                 TowerType = towerType,
                 xCoordinate = xCoordinate,
-                yCoordinate = yCoordinate
+                yCoordinate = yCoordinate,
+                Damage = tower.GetDamage(),
+                Range = tower.GetRange(),
+                Id = Towers.Count,
             });
         }
 

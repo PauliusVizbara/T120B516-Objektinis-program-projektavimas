@@ -59,8 +59,9 @@ namespace TowerDefense.SignalR.Hubs
 
             while (gameManager.CurrentLevel() > 0)
             {
+                System.Diagnostics.Debug.WriteLine(gameManager.Towers.Count);
                 gameFlowHelper.GameTickOperations(gameStatusModel.MonsterList, gameStatusModel.DeadMonstersList, gameManager.Towers);
-                await clients.All.SendAsync("GameStatus", gameStatusModel);
+                await clients.All.SendAsync("GameStatus", gameStatusModel, gameManager.Towers);
                 Thread.Sleep(1000);
             }
             return true;
@@ -71,38 +72,39 @@ namespace TowerDefense.SignalR.Hubs
             System.Diagnostics.Debug.WriteLine(x);
             System.Diagnostics.Debug.WriteLine(y);
             System.Diagnostics.Debug.WriteLine(towerType);
-            gameManager.AddTower(x, y, towerType);
             Tower tower = null;
             switch (towerType)
             {
                 case "Archer":
                     tower = new ArcherCreator(10, 20, "physical").createTower();
-                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower, gameManager.Towers.Count);
                     break;
 
                 case "Bomber":
                     tower = new BomberCreator(10, 20, "physical").createTower();
-                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower, gameManager.Towers.Count);
                     break;
 
                 case "Freeze":
                     tower = new FreezeCreator(10, 20, "physical").createTower();
-                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower, gameManager.Towers.Count);
                     break;
 
                 case "Mage":
                      tower = new MageCreator(10, 20, "physical").createTower();
-                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower, gameManager.Towers.Count);
                     break;
 
                 case "Bank":
                     tower = new BankCreator(10, "physical").createTower();
-                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower);
+                    await _hubContext.Clients.All.SendAsync("BuildTower", x, y, tower, gameManager.Towers.Count);
                     break;
                 default:
                     System.Diagnostics.Debug.WriteLine("Didn't found the tower type");
                     break;
             }
+            gameManager.AddTower(x, y, towerType, tower);
+
         }
 
         public async Task EndGame()

@@ -15,6 +15,11 @@ namespace TowerDefense.SignalR.GameFlowHelpers
     {
         public void GameTickOperations(List<Monster> monsters, List<Monster> deadMonsters, List<BuiltTower> towers)
         {
+            foreach (var item in towers)
+            {
+                item.Damage++;
+            }
+
             DoDamage(monsters, deadMonsters, towers);
             MoveMonsters(monsters);            
         }

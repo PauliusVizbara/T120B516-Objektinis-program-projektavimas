@@ -10,5 +10,8 @@ namespace TowerDefense.Models.Tower
         public string TowerType { get; set; }
         public int xCoordinate { get; set; }
         public int yCoordinate { get; set; }
+        public int Damage { get; set; }
+        public int Range { get; set; }
+        public int Id { get; set; }
     }
 }
