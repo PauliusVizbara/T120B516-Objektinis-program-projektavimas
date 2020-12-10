@@ -60,6 +60,14 @@ const requestTowerUpgrade = (towerId, upgradeType) => {
     connection.invoke("RequestUpgradeTower", towerId, upgradeType)
 }
 
+const requestTowerBackup = (towerId) => {
+    connection.invoke("RequestBackupTower", towerId)
+}
+
+const requestTowerRestore = (towerId) => {
+    connection.invoke("RequestRestoreTower", towerId)
+}
+
 
 connection.on('BuildTower', (x, y, data, id) => {
     towers[id] = { x, y, ...data, id }

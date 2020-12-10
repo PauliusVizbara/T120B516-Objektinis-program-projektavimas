@@ -86,6 +86,16 @@ namespace TowerDefense.SignalR.Hubs
             });
         }
 
+        public async Task RequestBackupTower(int id)
+        {
+            gameManager.TowerCaretakers[id].Backup();
+        }
+
+        public async Task RequestRestoreTower(int id)
+        {
+            gameManager.TowerCaretakers[id].Restore();
+        }
+
         public async Task RequestBuildTower(int x, int y, string towerType)
         {
             System.Diagnostics.Debug.WriteLine(x);

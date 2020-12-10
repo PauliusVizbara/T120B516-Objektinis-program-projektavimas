@@ -56,6 +56,9 @@
         </div>
         <button type="button" onclick="requestTowerUpgrade(+this.parentNode.getAttribute('data-id'),'Damage')">Upgrade damage</button>
         <button type="button" onclick="requestTowerUpgrade(+this.parentNode.getAttribute('data-id'),'Range')">Upgrade range</button>
+        <hr />
+        <button type="button" onclick="requestTowerBackup(+this.parentNode.getAttribute('data-id'))">Backup tower</button>
+        <button type="button" onclick="requestTowerRestore(+this.parentNode.getAttribute('data-id'))">Restore tower</button>
     </div>
 </div>
 
