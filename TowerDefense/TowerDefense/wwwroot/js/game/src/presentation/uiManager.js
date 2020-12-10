@@ -23,12 +23,16 @@ class UIManager {
 
     }
 
-    showTowerInfoMenu(data) {
+    showTowerInfoMenu({ id }) {
+        const data = towers[id]
+        console.log('Tower menu', data)
         this.hideMenus()
         const menu = this.menus['tower-info-menu']
         menu.classList.add('show')
         menu.getElementsByClassName('tower-info-menu-x')[0].innerText = data.x
         menu.getElementsByClassName('tower-info-menu-y')[0].innerText = data.y
+        menu.getElementsByClassName('tower-info-menu-damage')[0].innerText = data.damage
+        menu.getElementsByClassName('tower-info-menu-range')[0].innerText = data.range
         Object.entries(data).forEach(([key, value]) => menu.setAttribute(`data-${key}`, value))
 
     }
