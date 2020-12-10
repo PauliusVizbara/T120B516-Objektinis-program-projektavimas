@@ -8,7 +8,7 @@ using TowerDefense.Models.Tower;
 
 namespace TowerDefense.GameManagerSingleton
 {
-    public class GameManager
+    public class GameManager : IGameManager
 
     {
         private static GameManager _instance;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TowerDefense.Data;
+using TowerDefense.Models.Iterator;
 
 namespace TowerDefense.Controllers
 {
@@ -19,10 +20,27 @@ namespace TowerDefense.Controllers
         }
 
         // GET: MapPathCoordinates
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool reverseDirection = false)
         {
             var towerDefenseContext = _context.MapPathCoordinates.Include(m => m.Map);
-            return View(await towerDefenseContext.ToListAsync());
+
+            var iteratorCollection = new MapPathsCollection();
+
+            iteratorCollection.AddItem(await towerDefenseContext.ToListAsync());
+
+            if (reverseDirection)
+            {
+                iteratorCollection.ReverseDirection();
+            }
+
+            var mapPaths = new List<MapPathCoordinate>();
+
+            foreach (var item in iteratorCollection)
+            {
+                mapPaths.Add((MapPathCoordinate)item);
+            }
+
+            return View(mapPaths);
         }
 
         // GET: MapPathCoordinates/Details/5

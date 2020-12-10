@@ -11,6 +11,7 @@ using TowerDefense.Models.Factory;
 using TowerDefense.SignalR.GameFlowHelpers;
 using TowerDefense.SignalR.Models;
 using TowerDefense.Models.Observer;
+using TowerDefense.Models.Proxy;
 
 namespace TowerDefense.SignalR.Hubs
 {
@@ -36,7 +37,8 @@ namespace TowerDefense.SignalR.Hubs
 
         public async Task StartGame()
         {
-            gameManager.GameStart();
+            ProxyGameManager proxyGameManager = new ProxyGameManager(gameManager);
+            proxyGameManager.GameStart();
 
             Task.Factory.StartNew(() => GameFlow(_hubContext.Clients));
 
