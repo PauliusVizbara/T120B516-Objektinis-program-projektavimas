@@ -23,7 +23,7 @@ namespace TowerDefense.GameManagerSingleton
 
         protected GameManager()
         {
-
+            _currentLevel = 0;
         }
 
         public static GameManager GetGameManager()
@@ -67,12 +67,14 @@ namespace TowerDefense.GameManagerSingleton
             _currentLevel = 0;
         }
 
-        public void GameStart()
+        public bool GameStart()
         {
             smallScore.SetProccess(midScore);
             midScore.SetProccess(bigScore);
 
             _currentLevel = 1;
+
+            return true;
         }
 
         public void SetCoordinates(List<MapPathCoordinate> coordinates)

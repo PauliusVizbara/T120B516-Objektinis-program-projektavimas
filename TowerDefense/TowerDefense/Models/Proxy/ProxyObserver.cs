@@ -16,12 +16,14 @@ namespace TowerDefense.Models.Proxy
             this._realSubject = realSubject;
         }
 
-        public void GameStart()
+        public bool GameStart()
         {
             if (this.CheckAccess())
             {
                 this._realSubject.GameStart();
+                return true;
             }
+            return false;
         }
 
         public bool CheckAccess()

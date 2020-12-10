@@ -7,6 +7,6 @@ namespace TowerDefense.GameManagerSingleton
 {
     public interface IGameManager
     {
-        public void GameStart();
+        public bool GameStart();
     }
 }

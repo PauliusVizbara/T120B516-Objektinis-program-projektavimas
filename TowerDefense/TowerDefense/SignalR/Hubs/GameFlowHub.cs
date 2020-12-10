@@ -38,12 +38,13 @@ namespace TowerDefense.SignalR.Hubs
         public async Task StartGame()
         {
             ProxyGameManager proxyGameManager = new ProxyGameManager(gameManager);
-            proxyGameManager.GameStart();
 
-            Task.Factory.StartNew(() => GameFlow(_hubContext.Clients));
+            if (proxyGameManager.GameStart())
+            {
+                Task.Factory.StartNew(() => GameFlow(_hubContext.Clients));
 
-            await _hubContext.Clients.All.SendAsync("StartGame");
-            
+                await _hubContext.Clients.All.SendAsync("StartGame");
+            }
         }
 
         private async Task<bool> GameFlow(IHubClients clients)
