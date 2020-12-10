@@ -61,10 +61,12 @@ const requestTowerUpgrade = (towerId, upgradeType) => {
 }
 
 const requestTowerBackup = (towerId) => {
+    uiManager.hideMenus()
     connection.invoke("RequestBackupTower", towerId)
 }
 
 const requestTowerRestore = (towerId) => {
+    uiManager.hideMenus()
     connection.invoke("RequestRestoreTower", towerId)
 }
 
