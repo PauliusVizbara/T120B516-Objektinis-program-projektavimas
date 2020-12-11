@@ -9,10 +9,18 @@ document.getElementById('start-game-button').addEventListener("click", (e) => {
 })
 
 
-connection.on('GameStatus', (data) => {
+connection.on('GameStatus', (data, towersList) => {
+    console.log('Game state', data, towersList)
     document.getElementById('start-game-button').classList.add('hide')
     const monsterList = data.monsterList
     const deadMonstersList = data.deadMonstersList
+
+    towersList.forEach(tower => {
+        towers[tower.id] = {
+            ...towers[tower.id],
+            ...tower,
+        }
+    })
 
     deadMonstersList.forEach(monster => {
         const { monsterIndex: id } = monster 
@@ -24,10 +32,8 @@ connection.on('GameStatus', (data) => {
 
     monsterList.forEach(monster => {
         const { monsterIndex: id, xCoordinate, currentHealth, yCoordinate, monsterType } = monster
-        console.log(monster)
         if (tiles[yCoordinate - 1] && tiles[yCoordinate - 1][xCoordinate - 1]) {
             if (!monsters[id]) {
-                console.log(`monster${monsterType}`)
                 monsters[id] = new Entity({
                     currentHealth,
                     tile: tiles[xCoordinate - 1][yCoordinate - 1], sprite: sprites[`monster${monsterType}`],
@@ -49,13 +55,27 @@ const requestTowerBuild = (x, y, towerType) => {
     connection.invoke("RequestBuildTower", x, y, towerType)
 }
 
+const requestTowerUpgrade = (towerId, upgradeType) => {
+    uiManager.hideMenus()
+    connection.invoke("RequestUpgradeTower", towerId, upgradeType)
+}
+
+const requestTowerBackup = (towerId) => {
+    uiManager.hideMenus()
+    connection.invoke("RequestBackupTower", towerId)
+}
+
+const requestTowerRestore = (towerId) => {
+    uiManager.hideMenus()
+    connection.invoke("RequestRestoreTower", towerId)
+}
 
 
-connection.on('BuildTower', (x, y, data) => {
-    console.log(data, sprites[data.name])
+connection.on('BuildTower', (x, y, data, id) => {
+    towers[id] = { x, y, ...data, id }
     const tower = new Entity({
         tile: tiles[x][y], sprite: sprites[data.name],
-        onClick: () => uiManager.showTowerInfoMenu({ x, y, ...data }),
+        onClick: () => uiManager.showTowerInfoMenu({ x, y, ...data, id }),
         renderBuilder: TowerRenderBuilder,
     })
     tower.render()

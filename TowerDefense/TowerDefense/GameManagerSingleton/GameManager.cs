@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using TowerDefense.Data;
 using TowerDefense.Models.Observer;
+using TowerDefense.Models.Factory;
 using TowerDefense.Models.Tower;
+using TowerDefense.Models.Memento;
 
 namespace TowerDefense.GameManagerSingleton
 {
@@ -20,7 +22,7 @@ namespace TowerDefense.GameManagerSingleton
         private static object syncLock = new object();
         private List<MapPathCoordinate> Coordinates = new List<MapPathCoordinate>();
         public List<BuiltTower> Towers = new List<BuiltTower>();
-
+        public List<TowerCaretaker> TowerCaretakers = new List<TowerCaretaker>();
         protected GameManager()
         {
             _currentLevel = 0;
@@ -42,14 +44,19 @@ namespace TowerDefense.GameManagerSingleton
             return _instance;
         }
 
-        public void AddTower(int xCoordinate, int yCoordinate, string towerType)
+        public void AddTower(int xCoordinate, int yCoordinate, string towerType, Tower tower)
         {
-            Towers.Add(new BuiltTower
+            BuiltTower builtTower = new BuiltTower
             {
                 TowerType = towerType,
                 xCoordinate = xCoordinate,
-                yCoordinate = yCoordinate
-            });
+                yCoordinate = yCoordinate,
+                Damage = tower.GetDamage(),
+                Range = tower.GetRange(),
+                Id = Towers.Count,
+            };
+            Towers.Add(builtTower);
+            TowerCaretakers.Add(new TowerCaretaker { Mementos = new Stack<TowerMemento>(), Originator = builtTower });
         }
 
         public int CurrentLevel()
